@@ -305,7 +305,6 @@ export const Form = ({
           color="secondary"
           onClick={() => {
             onClose();
-            form.reset();
           }}
         >
           Cancelar

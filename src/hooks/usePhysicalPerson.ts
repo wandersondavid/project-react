@@ -63,7 +63,31 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
   const [data, setData] = useState<PhysicalPersonType[]>([]);
   const [open, setOpen] = useState(false);
 
+  const form = useForm<ValidationPhysicalPerson>({
+    resolver: zodResolver(validationPhysicalPersonSchema),
+  });
+
+  const resetForm = () => {
+    form.reset({
+      id: "",
+      name: "",
+      cpf: "",
+      phone: "",
+      addresses: {
+        id: "",
+        number: "",
+        complement: "",
+        neighborhood: "",
+        city: "",
+        state: "",
+        zip_code: "",
+        physical_person_id: "",
+      },
+    });
+  };
+
   const handleOpenNewPerson = () => {
+    resetForm();
     setOpen((prev) => !prev);
   };
 
@@ -71,10 +95,6 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
     fetchPhysicalPersonById(id);
     setOpen((prev) => !prev);
   };
-
-  const form = useForm<ValidationPhysicalPerson>({
-    resolver: zodResolver(validationPhysicalPersonSchema),
-  });
 
   const postPhysicalPerson = async (data: ValidationPhysicalPerson) => {
     try {
@@ -97,7 +117,7 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
       setLoading("success");
       handleOpenNewPerson();
       fetchPhysicalPerson();
-      form.reset();
+      resetForm();
 
       return response.data;
     } catch (error) {
@@ -126,7 +146,7 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
       setLoading("success");
       setOpen(false);
       fetchPhysicalPerson();
-      form.reset();
+      resetForm();
 
       return response.data;
     } catch (error) {
