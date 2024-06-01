@@ -5,6 +5,7 @@ import api from "../services/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { fetchCepData } from "../services/viacep/viacep.service";
 import { PhysicalPersonType } from "../types/physical-person";
+import { removeSpecialCharacters } from "../utils/remove-special-characters";
 
 const validationPhysicalPersonSchema = z.object({
   id: z.string().optional(),
@@ -65,7 +66,19 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
     try {
       setLoading("submitting");
 
-      const response = await api.post("/physical-person", data);
+      const payload = {
+        ...data,
+        cpf: removeSpecialCharacters(data.cpf),
+        phone: removeSpecialCharacters(data.phone),
+        addresses: [
+          {
+            ...data.addresses,
+            zip_code: removeSpecialCharacters(data.addresses.zip_code),
+          },
+        ],
+      };
+
+      const response = await api.post("/physical-person", payload);
 
       setLoading("success");
 
@@ -79,7 +92,19 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
     try {
       setLoading("submitting");
 
-      const response = await api.put(`/physical-person/${data.id}`, data);
+      const payload = {
+        ...data,
+        cpf: removeSpecialCharacters(data.cpf),
+        phone: removeSpecialCharacters(data.phone),
+        addresses: [
+          {
+            ...data.addresses,
+            zip_code: removeSpecialCharacters(data.addresses.zip_code),
+          },
+        ],
+      };
+
+      const response = await api.put(`/physical-person/${data.id}`, payload);
 
       setLoading("success");
 

@@ -10,6 +10,9 @@ import {
   Typography,
 } from "@mui/material";
 import { UseFormReturn } from "react-hook-form";
+import { formatCpfInput } from "../../../../utils/format-cpf";
+import { formatPhoneInput } from "../../../../utils/format-phone";
+import { formatZipCode } from "../../../../utils/format-zip-code";
 
 type Props = {
   form: UseFormReturn<ValidationPhysicalPerson, any, undefined>;
@@ -76,6 +79,14 @@ export const Form = ({ form, onSubmit, onClose, fetchAddress }: Props) => {
               }}
               label="Telefone"
               {...form.register("phone")}
+              onChange={(e) => {
+                const phone = e.target.value;
+                form.setValue("phone", formatPhoneInput(phone));
+              }}
+              value={form.watch("phone")}
+              inputProps={{
+                maxLength: 15,
+              }}
               variant="outlined"
               fullWidth
               error={!!form.formState.errors.phone}
@@ -97,8 +108,15 @@ export const Form = ({ form, onSubmit, onClose, fetchAddress }: Props) => {
               InputLabelProps={{
                 shrink: true,
               }}
+              inputProps={{
+                maxLength: 14,
+              }}
               label="CPF"
               {...form.register("cpf")}
+              onChange={(e) => {
+                const cpf = e.target.value;
+                form.setValue("cpf", formatCpfInput(cpf));
+              }}
               variant="outlined"
               fullWidth
               error={!!form.formState.errors.cpf}
@@ -136,6 +154,13 @@ export const Form = ({ form, onSubmit, onClose, fetchAddress }: Props) => {
               label="Cep"
               {...form.register("addresses.zip_code")}
               onBlurCapture={fetchAddress}
+              onChange={(e) => {
+                const zip_code = e.target.value;
+                form.setValue("addresses.zip_code", formatZipCode(zip_code));
+              }}
+              inputProps={{
+                maxLength: 9,
+              }}
               variant="outlined"
               fullWidth
               error={!!form.formState.errors.addresses?.zip_code}
