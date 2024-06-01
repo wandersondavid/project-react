@@ -50,9 +50,10 @@ export type usePhysicalPersonType = {
   fetchAddress: () => void;
   data: PhysicalPersonType[];
   deletePhysicalPerson: (id: string) => void;
+  fetchPhysicalPersonById: (id: string) => void;
 };
 
-export const usePhysicalPerson = (id?: string): usePhysicalPersonType => {
+export const usePhysicalPerson = (): usePhysicalPersonType => {
   const [loading, setLoading] = useState<LoadingType>("loading");
   const [data, setData] = useState<PhysicalPersonType[]>([]);
 
@@ -108,7 +109,7 @@ export const usePhysicalPerson = (id?: string): usePhysicalPersonType => {
     }
   };
 
-  const fetchPhysicalPersonById = async () => {
+  const fetchPhysicalPersonById = async (id: string) => {
     try {
       const response = await api.get(`/physical-person/${id}`);
 
@@ -144,12 +145,6 @@ export const usePhysicalPerson = (id?: string): usePhysicalPersonType => {
   };
 
   useEffect(() => {
-    if (id) {
-      fetchPhysicalPersonById();
-    }
-  }, [id]);
-
-  useEffect(() => {
     fetchPhysicalPerson();
   }, []);
 
@@ -168,5 +163,6 @@ export const usePhysicalPerson = (id?: string): usePhysicalPersonType => {
     fetchAddress,
     data,
     deletePhysicalPerson,
+    fetchPhysicalPersonById
   };
 };
