@@ -124,7 +124,7 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
       const response = await api.put(`/physical-person/${data.id}`, payload);
 
       setLoading("success");
-      handleOpenEditPerson(data.id);
+      setOpen(false);
       fetchPhysicalPerson();
       form.reset();
 
@@ -215,5 +215,6 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
     open,
     handleOpenNewPerson,
     handleOpenEditPerson,
+    fetchPhysicalPerson,
   };
 };
