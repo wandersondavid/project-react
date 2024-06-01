@@ -1,6 +1,6 @@
 import { usePhysicalPerson } from "../../hooks/usePhysicalPerson";
 import { PageContainer } from "../../components/PageContainer";
-import { Box, styled } from "@mui/material";
+import { Box, Button, styled } from "@mui/material";
 import { CardPerson } from "./components/CardPerson";
 
 const ContainerBox = styled(Box)`
@@ -10,21 +10,29 @@ const ContainerBox = styled(Box)`
   margin-top: 16px;
 `;
 
-const ContentBox = styled(Box)`
+const ContainerButton = styled(Box)`
   display: flex;
-  flex-direction: column;
   gap: 16px;
-  background-color: #f5f6f6;
-  border-radius: 13px;
-  justify-content: start;
-  align-items: start;
 `;
 
 export const PhysicalPerson = () => {
   const { data, deletePhysicalPerson } = usePhysicalPerson();
 
   return (
-    <PageContainer title="Cadastro de Pessoa Física">
+    <PageContainer
+      title="Cadastro de Pessoa Física"
+      component={
+        <ContainerButton>
+          <Button color="secondary" onClick={() => {}}>
+            Ver relatórios
+          </Button>
+
+          <Button variant="contained"  onClick={() => {}}>
+            Nova pessoa física
+          </Button>
+        </ContainerButton>
+      }
+    >
       <ContainerBox>
         {data.map((item) => (
           <CardPerson

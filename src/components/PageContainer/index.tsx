@@ -4,33 +4,46 @@ import { styled } from "@mui/material/styles";
 type Props = {
   children: React.ReactNode;
   title: string;
+  component?: JSX.Element;
 };
 
-const CustomContainer = styled(Box)({
-  paddingTop: 16,
-  paddingBottom: 16,
-  width: "100%",
-  display: "flex",
-  flexDirection: "column",
-  flex: 1,
-  justifyContent: "center",
-}) as typeof Box;
+const CustomContainer = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 50px;
+`;
 
-const CustomTypography = styled(Typography)({
-  fontSize: 20,
-  fontWeight: "bold",
-  textAlign: "start",
-}) as typeof Typography;
+const CustomTypography = styled(Typography)`
+  color: #4b4e53;
+  font-size: 24px;
+  font-weight: 700;
+`;
 
-export const PageContainer = ({ children, title }: Props): JSX.Element => {
+const HeaderBox = styled(Box)`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+`;
+
+export const PageContainer = ({
+  children,
+  title,
+  component,
+}: Props): JSX.Element => {
   return (
     <>
       <CustomContainer>
-        {title && (
-          <CustomTypography variant="h1" component="h1" gutterBottom>
-            {title}
-          </CustomTypography>
-        )}
+        <HeaderBox>
+          {title && (
+            <CustomTypography variant="h1" gutterBottom>
+              {title}
+            </CustomTypography>
+          )}
+          {component && component}
+        </HeaderBox>
+
         {children}
       </CustomContainer>
     </>
