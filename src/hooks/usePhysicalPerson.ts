@@ -1,10 +1,10 @@
 import { z } from "zod";
 import { useForm, UseFormReturn } from "react-hook-form";
 import { useEffect, useState } from "react";
-import api from "@/services/api";
+import api from "../services/api";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { fetchCepData } from "@/services/viacep/viacep.service";
-import { PhysicalPersonType } from "@/types/physical-person";
+import { fetchCepData } from "../services/viacep/viacep.service";
+import { PhysicalPersonType } from "../types/physical-person";
 
 const validationPhysicalPersonSchema = z.object({
   id: z.string().optional(),
@@ -49,6 +49,7 @@ export type usePhysicalPersonType = {
   loading: LoadingType;
   fetchAddress: () => void;
   data: PhysicalPersonType[];
+  deletePhysicalPerson: (id: string) => void;
 };
 
 export const usePhysicalPerson = (id?: string): usePhysicalPersonType => {
@@ -82,6 +83,16 @@ export const usePhysicalPerson = (id?: string): usePhysicalPersonType => {
       setLoading("success");
 
       return response.data;
+    } catch (error) {
+      setLoading("error");
+    }
+  };
+
+  const deletePhysicalPerson = async (id: string) => {
+    try {
+      setLoading("submitting");
+      await api.delete(`/physical-person/${id}`);
+      setLoading("success");
     } catch (error) {
       setLoading("error");
     }
@@ -156,5 +167,6 @@ export const usePhysicalPerson = (id?: string): usePhysicalPersonType => {
     loading,
     fetchAddress,
     data,
+    deletePhysicalPerson,
   };
 };
