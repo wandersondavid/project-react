@@ -1,7 +1,5 @@
+import { PageContainer } from "../../components/PageContainer";
+
 export const PhysicalPerson = () => {
-  return (
-    <div>
-      <h1>physical-person</h1>
-    </div>
-  );
+  return <PageContainer title="Cadastro de Pessoa Física">test</PageContainer>;
 };
