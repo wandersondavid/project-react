@@ -240,7 +240,10 @@ export const Form = ({ form, onSubmit, onClose, fetchAddress }: Props) => {
           type="button"
           variant="outlined"
           color="secondary"
-          onClick={onClose}
+          onClick={() => {
+            onClose();
+            form.reset();
+          }}
         >
           Cancelar
         </Button>
