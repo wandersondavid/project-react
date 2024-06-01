@@ -149,7 +149,7 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
   }, []);
 
   const onSubmit = form.handleSubmit((data) => {
-    if (id) {
+    if (data.id) {
       updatePhysicalPerson(data);
     }
 
