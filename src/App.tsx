@@ -1,23 +1,11 @@
 import "./App.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Home } from "./page/home";
-import { PhysicalPerson } from "./page/physical-person";
+import { AppRoutes } from "./routes";
 
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Home />,
-    },
-    {
-      path: "/physical-person",
-      element: <PhysicalPerson />,
-    },
-  ]);
 
   return (
     <>
-      <RouterProvider router={router} />
+      <AppRoutes  />
     </>
   );
 }
