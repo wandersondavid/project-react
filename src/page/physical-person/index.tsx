@@ -2,6 +2,9 @@ import { usePhysicalPerson } from "../../hooks/usePhysicalPerson";
 import { PageContainer } from "../../components/PageContainer";
 import { Box, Button, styled } from "@mui/material";
 import { CardPerson } from "./components/CardPerson";
+import { DialogForm } from "./components/DialogForm";
+import { useState } from "react";
+import { Form } from "./components/Form";
 
 const ContainerBox = styled(Box)`
   display: flex;
@@ -25,7 +28,18 @@ const ContainerButton = styled(Box)`
 `;
 
 export const PhysicalPerson = () => {
-  const { data, deletePhysicalPerson } = usePhysicalPerson();
+  const [open, setOpen] = useState(false);
+  const { data, deletePhysicalPerson, fetchPhysicalPersonById } =
+    usePhysicalPerson();
+
+  const handleOpenNewPerson = () => {
+    setOpen((prev) => !prev);
+  };
+
+  const handleOpenEditPerson = (id: string) => {
+    fetchPhysicalPersonById(id);
+    setOpen((prev) => !prev);
+  };
 
   return (
     <PageContainer
@@ -36,7 +50,7 @@ export const PhysicalPerson = () => {
             Ver relatórios
           </Button>
 
-          <Button variant="contained" onClick={() => {}}>
+          <Button variant="contained" onClick={handleOpenNewPerson}>
             Nova pessoa física
           </Button>
         </ContainerButton>
@@ -50,10 +64,14 @@ export const PhysicalPerson = () => {
           <CardPerson
             item={item}
             onDelete={deletePhysicalPerson}
-            onEdit={() => {}}
+            onEdit={handleOpenEditPerson}
           />
         ))}
       </ContainerBox>
+
+      <DialogForm open={open} onClose={handleOpenNewPerson}>
+        <Form />
+      </DialogForm>
     </PageContainer>
   );
 };
