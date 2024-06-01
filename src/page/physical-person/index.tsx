@@ -17,7 +17,6 @@ const ContainerButton = styled(Box)`
     width: 200px;
   }
   @media (max-width: 768px) {
-    
     flex-direction: column;
     button {
       width: 100%;
@@ -43,6 +42,9 @@ export const PhysicalPerson = () => {
         </ContainerButton>
       }
     >
+      <Button sx={{ width: 300 }} variant="contained" onClick={() => {}}>
+        Solicitar relatório (CSV)
+      </Button>
       <ContainerBox>
         {data.map((item) => (
           <CardPerson
