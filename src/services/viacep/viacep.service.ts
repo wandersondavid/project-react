@@ -1,19 +1,11 @@
 import { apiViaCep } from "../api-viacep";
 import { ViaCepResponse } from "./viacep.types";
 
-const fetchCepData = async ({
-  cep,
+export const fetchCepData = async ({
+  zipCode,
 }: {
-  cep: string;
+  zipCode: string;
 }): Promise<ViaCepResponse> => {
-  try {
-    const response = await apiViaCep.get(`/ws/${cep}/json`, {});
+    const response = await apiViaCep.get(`/ws/${zipCode}/json`, {});
     return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const ViaCepService = {
-  fetchCepData,
 };
