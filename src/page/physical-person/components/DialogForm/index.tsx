@@ -9,7 +9,6 @@ type Props = {
 export const DialogForm = ({ open, onClose, children }: Props) => {
   return (
     <Dialog onClose={onClose} open={open}>
-      <DialogTitle>Pessoa</DialogTitle>
       <DialogContent>
         {children}
       </DialogContent>

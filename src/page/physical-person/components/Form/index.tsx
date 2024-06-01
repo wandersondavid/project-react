@@ -28,6 +28,18 @@ const ContainerButton = styled(Box)`
 export const Form = ({ form, onSubmit, onClose, fetchAddress }: Props) => {
   return (
     <Box component="form" onSubmit={onSubmit} noValidate autoComplete="off">
+      <Typography
+        variant="h2"
+        component="h2"
+        color="#4B4E53"
+        fontSize={16}
+        marginTop={2}
+        fontWeight="bold"
+      >
+        {form.formState.isSubmitting
+          ? "Editando Pessoa Física"
+          : "Cadastrar Pessoa Física"}
+      </Typography>
       <Grid container spacing={1} columns={16}>
         <Grid item xs={8}>
           <FormControl
