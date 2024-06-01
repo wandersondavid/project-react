@@ -1,4 +1,6 @@
 import { PhysicalPersonType } from "@/types/physical-person";
+import { formatPhone } from "../../../../utils/format-phone";
+import { formatCpf } from "../../../../utils/format-cpf";
 import { Box, styled, Typography, Collapse } from "@mui/material";
 import { ChevronDown, ChevronUp, Pencil, Trash2 } from "lucide-react";
 import { useState } from "react";
@@ -84,8 +86,8 @@ export const CardPerson = ({ item, onDelete, onEdit }: Props) => {
         </Box>
       </HeaderBox>
       <DataBox>
-        <Typography>Telefone: {item.phone}</Typography>
-        <Typography>Cpf: {item.cpf}</Typography>
+        <Typography>Telefone: {formatPhone(item.phone)}</Typography>
+        <Typography>Cpf: {formatCpf(item.cpf)}</Typography>
       </DataBox>
 
       <Box>
