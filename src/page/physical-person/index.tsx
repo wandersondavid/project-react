@@ -29,8 +29,14 @@ const ContainerButton = styled(Box)`
 
 export const PhysicalPerson = () => {
   const [open, setOpen] = useState(false);
-  const { data, deletePhysicalPerson, fetchPhysicalPersonById } =
-    usePhysicalPerson();
+  const {
+    data,
+    deletePhysicalPerson,
+    fetchPhysicalPersonById,
+    form,
+    onSubmit,
+    fetchAddress,
+  } = usePhysicalPerson();
 
   const handleOpenNewPerson = () => {
     setOpen((prev) => !prev);
@@ -46,7 +52,7 @@ export const PhysicalPerson = () => {
       title="Cadastro de Pessoa Física"
       component={
         <ContainerButton>
-          <Button color="secondary" onClick={() => {}}>
+          <Button color="secondary" variant="outlined" onClick={() => {}}>
             Ver relatórios
           </Button>
 
@@ -56,7 +62,12 @@ export const PhysicalPerson = () => {
         </ContainerButton>
       }
     >
-      <Button sx={{ width: 300 }} variant="contained" onClick={() => {}}>
+      <Button
+        sx={{ width: 300 }}
+        color="secondary"
+        variant="outlined"
+        onClick={() => {}}
+      >
         Solicitar relatório (CSV)
       </Button>
       <ContainerBox>
@@ -70,7 +81,7 @@ export const PhysicalPerson = () => {
       </ContainerBox>
 
       <DialogForm open={open} onClose={handleOpenNewPerson}>
-        <Form />
+        <Form form={form} onSubmit={onSubmit} onClose={handleOpenNewPerson} fetchAddress={fetchAddress} />
       </DialogForm>
     </PageContainer>
   );

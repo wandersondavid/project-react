@@ -9,20 +9,20 @@ import { PhysicalPersonType } from "../types/physical-person";
 const validationPhysicalPersonSchema = z.object({
   id: z.string().optional(),
   name: z.string().min(1, "Nome é obrigatório"),
-  cpf: z.string().min(1),
-  phone: z.string().min(1),
+  cpf: z.string().min(1, "Cpf é obrigatório"),
+  phone: z.string().min(1, "Telefone é obrigatório"),
   addresses: z.object({
     id: z.string().optional(),
-    number: z.string(),
-    complement: z.string(),
-    neighborhood: z.string(),
-    city: z.string(),
-    state: z.string(),
-    zip_code: z.string(),
+    number: z.string().min(1, "Número é obrigatório"),
+    complement: z.string().optional(),
+    neighborhood: z.string().min(1, "Bairro é obrigatório"),
+    city: z.string().min(1, "Cidade é obrigatório"),
+    state: z.string().min(1, "Estado é obrigatório"),
+    zip_code: z.string().min(1, "Cep é obrigatório"),
   }),
 });
 
-type ValidationPhysicalPerson = z.infer<
+export type ValidationPhysicalPerson = z.infer<
   typeof validationPhysicalPersonSchema
 > & {
   id: string;
@@ -163,6 +163,6 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
     fetchAddress,
     data,
     deletePhysicalPerson,
-    fetchPhysicalPersonById
+    fetchPhysicalPersonById,
   };
 };
