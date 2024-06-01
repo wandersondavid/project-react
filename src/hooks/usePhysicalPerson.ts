@@ -137,6 +137,8 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
     try {
       setLoading("submitting");
       await api.delete(`/physical-person/${id}`);
+      fetchPhysicalPerson();
+
       setLoading("success");
     } catch (error) {
       setLoading("error");
@@ -194,7 +196,7 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
 
   const onSubmit = form.handleSubmit((data) => {
     if (data.id) {
-     return updatePhysicalPerson(data);
+      return updatePhysicalPerson(data);
     }
 
     postPhysicalPerson(data);
