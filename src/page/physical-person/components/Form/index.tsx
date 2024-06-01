@@ -49,6 +49,9 @@ export const Form = ({ form, onSubmit, onClose, fetchAddress }: Props) => {
             error={!!form.formState.errors.name}
           >
             <TextField
+              InputLabelProps={{
+                shrink: true,
+              }}
               label="Nome"
               {...form.register("name")}
               variant="outlined"
@@ -68,6 +71,9 @@ export const Form = ({ form, onSubmit, onClose, fetchAddress }: Props) => {
             error={!!form.formState.errors.phone}
           >
             <TextField
+              InputLabelProps={{
+                shrink: true,
+              }}
               label="Telefone"
               {...form.register("phone")}
               variant="outlined"
@@ -88,6 +94,9 @@ export const Form = ({ form, onSubmit, onClose, fetchAddress }: Props) => {
             error={!!form.formState.errors.cpf}
           >
             <TextField
+              InputLabelProps={{
+                shrink: true,
+              }}
               label="CPF"
               {...form.register("cpf")}
               variant="outlined"
@@ -121,12 +130,14 @@ export const Form = ({ form, onSubmit, onClose, fetchAddress }: Props) => {
             error={!!form.formState.errors.addresses?.zip_code}
           >
             <TextField
+              InputLabelProps={{
+                shrink: true,
+              }}
               label="Cep"
               {...form.register("addresses.zip_code")}
               onBlurCapture={fetchAddress}
               variant="outlined"
               fullWidth
-              name="zip_code"
               error={!!form.formState.errors.addresses?.zip_code}
             />
             <FormHelperText>
@@ -142,7 +153,11 @@ export const Form = ({ form, onSubmit, onClose, fetchAddress }: Props) => {
             error={!!form.formState.errors.addresses?.city}
           >
             <TextField
+              InputLabelProps={{
+                shrink: true,
+              }}
               label="Cidade"
+              disabled
               {...form.register("addresses.city")}
               variant="outlined"
               fullWidth
@@ -162,7 +177,11 @@ export const Form = ({ form, onSubmit, onClose, fetchAddress }: Props) => {
             error={!!form.formState.errors.addresses?.state}
           >
             <TextField
+              InputLabelProps={{
+                shrink: true,
+              }}
               label="Estado"
+              disabled
               {...form.register("addresses.state")}
               variant="outlined"
               fullWidth
@@ -182,6 +201,9 @@ export const Form = ({ form, onSubmit, onClose, fetchAddress }: Props) => {
             error={!!form.formState.errors.addresses?.neighborhood}
           >
             <TextField
+              InputLabelProps={{
+                shrink: true,
+              }}
               label="Bairro"
               {...form.register("addresses.neighborhood")}
               variant="outlined"
@@ -202,6 +224,9 @@ export const Form = ({ form, onSubmit, onClose, fetchAddress }: Props) => {
             error={!!form.formState.errors.addresses?.number}
           >
             <TextField
+              InputLabelProps={{
+                shrink: true,
+              }}
               label="Número"
               {...form.register("addresses.number")}
               variant="outlined"
@@ -222,6 +247,9 @@ export const Form = ({ form, onSubmit, onClose, fetchAddress }: Props) => {
             error={!!form.formState.errors.addresses?.complement}
           >
             <TextField
+              InputLabelProps={{
+                shrink: true,
+              }}
               label="Complemento"
               {...form.register("addresses.complement")}
               variant="outlined"

@@ -126,7 +126,7 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
 
   const fetchAddress = async () => {
     try {
-      const zipCode = form.getValues("addresses.zip_code");
+      const zipCode = form.watch("addresses.zip_code");
 
       if (!zipCode) {
         return;
