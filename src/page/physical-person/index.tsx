@@ -13,6 +13,16 @@ const ContainerBox = styled(Box)`
 const ContainerButton = styled(Box)`
   display: flex;
   gap: 16px;
+  button {
+    width: 200px;
+  }
+  @media (max-width: 768px) {
+    
+    flex-direction: column;
+    button {
+      width: 100%;
+    }
+  }
 `;
 
 export const PhysicalPerson = () => {
@@ -27,7 +37,7 @@ export const PhysicalPerson = () => {
             Ver relatórios
           </Button>
 
-          <Button variant="contained"  onClick={() => {}}>
+          <Button variant="contained" onClick={() => {}}>
             Nova pessoa física
           </Button>
         </ContainerButton>

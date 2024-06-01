@@ -18,6 +18,7 @@ const CustomTypography = styled(Typography)`
   color: #4b4e53;
   font-size: 24px;
   font-weight: 700;
+  text-align: start;
 `;
 
 const HeaderBox = styled(Box)`
@@ -25,6 +26,10 @@ const HeaderBox = styled(Box)`
   justify-content: space-between;
   width: 100%;
   align-items: center;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: start;
+  }
 `;
 
 export const PageContainer = ({
