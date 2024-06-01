@@ -42,7 +42,7 @@ export type ValidationPhysicalPerson = z.infer<
   };
 };
 
-type LoadingType = "loading" | "success" | "error" | "submitting";
+export type LoadingType = "loading" | "success" | "error" | "submitting";
 
 export type usePhysicalPersonType = {
   form: UseFormReturn<ValidationPhysicalPerson, any, undefined>;
@@ -52,11 +52,24 @@ export type usePhysicalPersonType = {
   data: PhysicalPersonType[];
   deletePhysicalPerson: (id: string) => void;
   fetchPhysicalPersonById: (id: string) => void;
+  open: boolean;
+  handleOpenNewPerson: () => void;
+  handleOpenEditPerson: (id: string) => void;
 };
 
 export const usePhysicalPerson = (): usePhysicalPersonType => {
   const [loading, setLoading] = useState<LoadingType>("loading");
   const [data, setData] = useState<PhysicalPersonType[]>([]);
+  const [open, setOpen] = useState(false);
+
+  const handleOpenNewPerson = () => {
+    setOpen((prev) => !prev);
+  };
+
+  const handleOpenEditPerson = (id: string) => {
+    fetchPhysicalPersonById(id);
+    setOpen((prev) => !prev);
+  };
 
   const form = useForm<ValidationPhysicalPerson>({
     resolver: zodResolver(validationPhysicalPersonSchema),
@@ -81,6 +94,9 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
       const response = await api.post("/physical-person", payload);
 
       setLoading("success");
+      handleOpenNewPerson();
+      fetchPhysicalPerson();
+      form.reset();
 
       return response.data;
     } catch (error) {
@@ -107,6 +123,9 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
       const response = await api.put(`/physical-person/${data.id}`, payload);
 
       setLoading("success");
+      handleOpenEditPerson(data.id);
+      fetchPhysicalPerson();
+      form.reset();
 
       return response.data;
     } catch (error) {
@@ -189,5 +208,8 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
     data,
     deletePhysicalPerson,
     fetchPhysicalPersonById,
+    open,
+    handleOpenNewPerson,
+    handleOpenEditPerson,
   };
 };

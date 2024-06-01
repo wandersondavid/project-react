@@ -1,4 +1,7 @@
-import { ValidationPhysicalPerson } from "@/hooks/usePhysicalPerson";
+import {
+  LoadingType,
+  ValidationPhysicalPerson,
+} from "@/hooks/usePhysicalPerson";
 import {
   Box,
   Button,
@@ -19,6 +22,7 @@ type Props = {
   onSubmit: () => void;
   onClose: () => void;
   fetchAddress: () => void;
+  loading: LoadingType;
 };
 const ContainerButton = styled(Box)`
   display: flex;
@@ -28,7 +32,13 @@ const ContainerButton = styled(Box)`
   }
 `;
 
-export const Form = ({ form, onSubmit, onClose, fetchAddress }: Props) => {
+export const Form = ({
+  form,
+  onSubmit,
+  onClose,
+  fetchAddress,
+  loading,
+}: Props) => {
   return (
     <Box component="form" onSubmit={onSubmit} noValidate autoComplete="off">
       <Typography
@@ -301,7 +311,7 @@ export const Form = ({ form, onSubmit, onClose, fetchAddress }: Props) => {
           Cancelar
         </Button>
         <Button type="submit" variant="contained">
-          Cadastrar
+          {loading === "submitting" ? "Carregando..." : "Salvar"}
         </Button>
       </ContainerButton>
     </Box>

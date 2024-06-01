@@ -28,24 +28,17 @@ const ContainerButton = styled(Box)`
 `;
 
 export const PhysicalPerson = () => {
-  const [open, setOpen] = useState(false);
   const {
     data,
     deletePhysicalPerson,
-    fetchPhysicalPersonById,
+    handleOpenNewPerson,
+    handleOpenEditPerson,
     form,
     onSubmit,
     fetchAddress,
+    loading,
+    open,
   } = usePhysicalPerson();
-
-  const handleOpenNewPerson = () => {
-    setOpen((prev) => !prev);
-  };
-
-  const handleOpenEditPerson = (id: string) => {
-    fetchPhysicalPersonById(id);
-    setOpen((prev) => !prev);
-  };
 
   return (
     <PageContainer
@@ -81,7 +74,13 @@ export const PhysicalPerson = () => {
       </ContainerBox>
 
       <DialogForm open={open} onClose={handleOpenNewPerson}>
-        <Form form={form} onSubmit={onSubmit} onClose={handleOpenNewPerson} fetchAddress={fetchAddress} />
+        <Form
+          form={form}
+          onSubmit={onSubmit}
+          onClose={handleOpenNewPerson}
+          fetchAddress={fetchAddress}
+          loading={loading}
+        />
       </DialogForm>
     </PageContainer>
   );
