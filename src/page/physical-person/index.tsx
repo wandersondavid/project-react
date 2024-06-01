@@ -1,10 +1,10 @@
 import { usePhysicalPerson } from "../../hooks/usePhysicalPerson";
 import { PageContainer } from "../../components/PageContainer";
-import { Box, Button, styled } from "@mui/material";
+import { Box, Button, styled, Typography } from "@mui/material";
 import { CardPerson } from "./components/CardPerson";
 import { DialogForm } from "./components/DialogForm";
-import { useState } from "react";
 import { Form } from "./components/Form";
+import { SkeletonPage } from "./components/SkeletonPage";
 
 const ContainerBox = styled(Box)`
   display: flex;
@@ -38,6 +38,7 @@ export const PhysicalPerson = () => {
     fetchAddress,
     loading,
     open,
+    fetchPhysicalPerson,
   } = usePhysicalPerson();
 
   return (
@@ -63,15 +64,47 @@ export const PhysicalPerson = () => {
       >
         Solicitar relatório (CSV)
       </Button>
-      <ContainerBox>
-        {data.map((item) => (
-          <CardPerson
-            item={item}
-            onDelete={deletePhysicalPerson}
-            onEdit={handleOpenEditPerson}
-          />
-        ))}
-      </ContainerBox>
+      {loading === "success" && !!data.length && (
+        <ContainerBox>
+          {data.map((item) => (
+            <CardPerson
+              item={item}
+              onDelete={deletePhysicalPerson}
+              onEdit={handleOpenEditPerson}
+            />
+          ))}
+        </ContainerBox>
+      )}
+
+      {loading === "success" && !data.length && (
+        <Box>
+          <Typography variant="h2" component="h2" color="#4B4E53" fontSize={16}>
+            Nenhum registro encontrado
+          </Typography>
+        </Box>
+      )}
+      {loading === "loading" && <SkeletonPage />}
+
+      {loading === "error" && (
+        <Box
+          display="flex"
+          flexDirection={"column"}
+          justifyContent="center"
+          gap={2}
+        >
+          <Typography variant="h2" component="h2" color="#4B4E53" fontSize={16}>
+            Error ao carregar os dados
+          </Typography>
+
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={fetchPhysicalPerson}
+          >
+            Tentar novamente
+          </Button>
+        </Box>
+      )}
 
       <DialogForm open={open} onClose={handleOpenNewPerson}>
         <Form

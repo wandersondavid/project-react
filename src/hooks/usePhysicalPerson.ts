@@ -55,6 +55,7 @@ export type usePhysicalPersonType = {
   open: boolean;
   handleOpenNewPerson: () => void;
   handleOpenEditPerson: (id: string) => void;
+  fetchPhysicalPerson: () => void;
 };
 
 export const usePhysicalPerson = (): usePhysicalPersonType => {
@@ -150,6 +151,7 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
       const response = await api.get("/physical-person");
 
       setData(response.data);
+      setLoading("success");
     } catch (error) {
       setLoading("error");
     }
