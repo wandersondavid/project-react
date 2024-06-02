@@ -5,6 +5,7 @@ import { CardPerson } from "./components/card-person";
 import { DialogForm } from "./components/dialog-form";
 import { Form } from "./components/form";
 import { SkeletonPage } from "./components/skeleton-page";
+import { useNavigate } from "react-router-dom";
 
 const ContainerBox = styled(Box)`
   display: flex;
@@ -39,14 +40,21 @@ export const PhysicalPerson = () => {
     loading,
     open,
     fetchPhysicalPerson,
+    requestReportPhysicalPerson,
   } = usePhysicalPerson();
+
+  const navigate = useNavigate();
+
+  const to = () => {
+    navigate("/physical-person-report");
+  };
 
   return (
     <PageContainer
       title="Cadastro de Pessoa Física"
       component={
         <ContainerButton>
-          <Button color="secondary" variant="outlined" onClick={() => {}}>
+          <Button color="secondary" variant="outlined" onClick={to}>
             Ver relatórios
           </Button>
 
@@ -60,7 +68,7 @@ export const PhysicalPerson = () => {
         sx={{ width: 300 }}
         color="secondary"
         variant="outlined"
-        onClick={() => {}}
+        onClick={requestReportPhysicalPerson}
       >
         Solicitar relatório (CSV)
       </Button>

@@ -1,7 +1,52 @@
+import { useReportPhysicalPerson } from "../../hooks/useReportPhysicalPerson";
+import { PageContainer } from "../../components/page-container";
+import { SkeletonPage } from "./components/skeleton-page";
+import {
+  Typography,
+  Box,
+  Grid,
+  List,
+  ListItemText,
+  ListItem,
+  Divider,
+} from "@mui/material";
+import { styled } from "@mui/system";
+import { Download } from "lucide-react";
+
+const ContainerList = styled(List)`
+  width: 100%;
+`;
 export const PhysicalRersonReport = () => {
+  const { data, loading } = useReportPhysicalPerson();
   return (
-    <div>
-      <h1>Home</h1>
-    </div>
+    <PageContainer title="List Relatório de Pessoa Física">
+      <Box display="flex">
+        {loading === "loading" && <SkeletonPage />}
+        {loading === "success" && !!data.length && (
+          <ContainerList dense={false} style={{ width: "100%" }}>
+            {data.map((item, index) => (
+              <>
+                <ListItem>
+                  <ListItemText
+                    primary={"Relatório de Pessoa Física"}
+                    secondary={`Status: ${item.status}`}
+                  />
+                  <Download cursor={"pointer"} />
+                </ListItem>
+                {index !== data.length - 1 && <Divider component="li" />}
+              </>
+            ))}
+          </ContainerList>
+        )}
+
+        {loading === "success" && !data.length && (
+          <Box>
+            <Typography fontSize="16px">
+              Nenhum dado encontrado para ser exibido
+            </Typography>
+          </Box>
+        )}
+      </Box>
+    </PageContainer>
   );
 };

@@ -42,7 +42,12 @@ export type ValidationPhysicalPerson = z.infer<
   };
 };
 
-export type LoadingType = "loading" | "success" | "error" | "submitting" | "error-fetching";
+export type LoadingType =
+  | "loading"
+  | "success"
+  | "error"
+  | "submitting"
+  | "error-fetching";
 
 export type usePhysicalPersonType = {
   form: UseFormReturn<ValidationPhysicalPerson, any, undefined>;
@@ -56,6 +61,7 @@ export type usePhysicalPersonType = {
   handleOpenNewPerson: () => void;
   handleOpenEditPerson: (id: string) => void;
   fetchPhysicalPerson: () => void;
+  requestReportPhysicalPerson: () => void;
 };
 
 export const usePhysicalPerson = (): usePhysicalPersonType => {
@@ -212,6 +218,17 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
     }
   };
 
+  const requestReportPhysicalPerson = async () => {
+    try {
+      await api.post("/report/physical-person", {
+        report: "physical-person",
+        status: "REQUESTED",
+      });
+    } catch (error) {
+    } finally {
+    }
+  };
+
   useEffect(() => {
     fetchPhysicalPerson();
   }, []);
@@ -236,5 +253,6 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
     handleOpenNewPerson,
     handleOpenEditPerson,
     fetchPhysicalPerson,
+    requestReportPhysicalPerson,
   };
 };
