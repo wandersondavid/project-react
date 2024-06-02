@@ -1,6 +1,6 @@
 import { usePhysicalPerson } from "../../hooks/usePhysicalPerson";
 import { PageContainer } from "../../components/page-container";
-import { Box, Button, styled, Typography } from "@mui/material";
+import { Box, Button, Divider, styled, Typography } from "@mui/material";
 import { CardPerson } from "./components/card-person";
 import { DialogForm } from "./components/dialog-form";
 import { Form } from "./components/form";
@@ -21,9 +21,18 @@ const ContainerButton = styled(Box)`
   }
   @media (max-width: 768px) {
     flex-direction: column;
+    width: 100%;
     button {
       width: 100%;
     }
+  }
+`;
+
+const ButtonStyled = styled(Button)`
+  width: 300px;
+
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `;
 
@@ -49,25 +58,25 @@ export const PhysicalPerson = () => {
       title="Cadastro de Pessoa Física"
       component={
         <ContainerButton>
-          <Button color="secondary" variant="outlined" onClick={to}>
+          <ButtonStyled color="secondary" variant="outlined" onClick={to}>
             Ver relatórios
-          </Button>
+          </ButtonStyled>
 
-          <Button variant="contained" onClick={handleOpenNewPerson}>
+          <ButtonStyled variant="contained" onClick={handleOpenNewPerson}>
             {!requestReport && "Nova pessoa física"}
             {requestReport && "Processando..."}
-          </Button>
+          </ButtonStyled>
         </ContainerButton>
       }
     >
-      <Button
-        sx={{ width: 300 }}
+      <Divider component="p" />
+      <ButtonStyled
         color="secondary"
         variant="outlined"
         onClick={requestReportPhysicalPerson}
       >
         Solicitar relatório (CSV)
-      </Button>
+      </ButtonStyled>
       {loading === "success" && !!data.length && (
         <ContainerBox>
           {data.map((item) => (
