@@ -20,7 +20,8 @@ const ContainerList = styled(List)`
 `;
 
 export const PhysicalRersonReport = () => {
-  const { data, loading } = useReportPhysicalPerson();
+  const { data, loading, dowloadReportPhysicalPerson } =
+    useReportPhysicalPerson();
   return (
     <PageContainer title="List Relatório de Pessoa Física">
       <Box display="flex">
@@ -37,7 +38,11 @@ export const PhysicalRersonReport = () => {
                     )} - Data: ${fotmatDate(item.created_at)}`}
                   />
                   {item.status === StatusReport.DONE && (
-                    <Download cursor={"pointer"} />
+                    <Download
+                      cursor={"pointer"}
+                      onClick={() => dowloadReportPhysicalPerson(item.id)}
+                      size={16}
+                    />
                   )}
                 </ListItem>
                 {index !== data.length - 1 && <Divider component="li" />}
