@@ -1,9 +1,9 @@
-import { PhysicalPersonType } from "@/types/physical-person";
 import { formatPhone } from "../../../../utils/format-phone";
 import { formatCpf } from "../../../../utils/format-cpf";
 import { Box, styled, Typography, Collapse } from "@mui/material";
 import { ChevronDown, ChevronUp, Pencil, Trash2 } from "lucide-react";
 import { useState } from "react";
+import { PhysicalPersonType } from "../../../../types/physical-person";
 
 const ContentBox = styled(Box)`
   display: flex;
@@ -106,7 +106,7 @@ export const CardPerson = ({ item, onDelete, onEdit }: Props) => {
           </Typography>
         </AddressBox>
 
-        {item.addresses.map((address) => (
+        {item.addresses.map((address:any) => (
           <Collapse in={open} key={address.id}>
             <DataBox>
               <Typography>Estado: {address.state}</Typography>
