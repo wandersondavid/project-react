@@ -5,7 +5,6 @@ import { CardPerson } from "./components/card-person";
 import { DialogForm } from "./components/dialog-form";
 import { Form } from "./components/form";
 import { SkeletonPage } from "./components/skeleton-page";
-import { useNavigate } from "react-router-dom";
 
 const ContainerBox = styled(Box)`
   display: flex;
@@ -41,13 +40,8 @@ export const PhysicalPerson = () => {
     open,
     fetchPhysicalPerson,
     requestReportPhysicalPerson,
+    to
   } = usePhysicalPerson();
-
-  const navigate = useNavigate();
-
-  const to = () => {
-    navigate("/physical-person-report");
-  };
 
   return (
     <PageContainer

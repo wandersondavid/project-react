@@ -7,6 +7,7 @@ import { fetchCepData } from "../services/viacep/viacep.service";
 import { PhysicalPersonType } from "../types/physical-person";
 import { removeSpecialCharacters } from "../utils/remove-special-characters";
 import { StatusReport } from "../enuns/status-report";
+import { useNavigate } from "react-router-dom";
 
 const validationPhysicalPersonSchema = z.object({
   id: z.string().optional(),
@@ -63,16 +64,24 @@ export type usePhysicalPersonType = {
   handleOpenEditPerson: (id: string) => void;
   fetchPhysicalPerson: () => void;
   requestReportPhysicalPerson: () => void;
+  requestReport: boolean;
+  to: () => void;
 };
 
 export const usePhysicalPerson = (): usePhysicalPersonType => {
   const [loading, setLoading] = useState<LoadingType>("loading");
+  const [requestReport, setRequestReport] = useState<boolean>(false);
   const [data, setData] = useState<PhysicalPersonType[]>([]);
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const form = useForm<ValidationPhysicalPerson>({
     resolver: zodResolver(validationPhysicalPersonSchema),
   });
+
+  const to = () => {
+    navigate("/physical-person-report");
+  };
 
   const resetForm = () => {
     form.reset({
@@ -221,12 +230,18 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
 
   const requestReportPhysicalPerson = async () => {
     try {
+      setRequestReport(true);
       await api.post("/report/physical-person", {
         report: "physical-person",
         status: StatusReport.PENDING,
       });
+
+      to();
     } catch (error) {
+      setRequestReport(false);
+      console.log("error request report ", error);
     } finally {
+      setRequestReport(false);
     }
   };
 
@@ -255,5 +270,7 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
     handleOpenEditPerson,
     fetchPhysicalPerson,
     requestReportPhysicalPerson,
+    requestReport,
+    to,
   };
 };
