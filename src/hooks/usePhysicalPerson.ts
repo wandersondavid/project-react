@@ -42,7 +42,7 @@ export type ValidationPhysicalPerson = z.infer<
   };
 };
 
-export type LoadingType = "loading" | "success" | "error" | "submitting";
+export type LoadingType = "loading" | "success" | "error" | "submitting" | "error-fetching";
 
 export type usePhysicalPersonType = {
   form: UseFormReturn<ValidationPhysicalPerson, any, undefined>;
@@ -173,7 +173,7 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
       setData(response.data);
       setLoading("success");
     } catch (error) {
-      setLoading("error");
+      setLoading("error-fetching");
     }
   };
 

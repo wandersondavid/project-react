@@ -1,10 +1,10 @@
 import { usePhysicalPerson } from "../../hooks/usePhysicalPerson";
-import { PageContainer } from "../../components/PageContainer";
+import { PageContainer } from "../../components/page-container";
 import { Box, Button, styled, Typography } from "@mui/material";
-import { CardPerson } from "./components/CardPerson";
-import { DialogForm } from "./components/DialogForm";
-import { Form } from "./components/Form";
-import { SkeletonPage } from "./components/SkeletonPage";
+import { CardPerson } from "./components/card-person";
+import { DialogForm } from "./components/dialog-form";
+import { Form } from "./components/form";
+import { SkeletonPage } from "./components/skeleton-page";
 
 const ContainerBox = styled(Box)`
   display: flex;
@@ -85,7 +85,7 @@ export const PhysicalPerson = () => {
       )}
       {loading === "loading" && <SkeletonPage />}
 
-      {loading === "error" && (
+      {loading === "error-fetching" && (
         <Box
           display="flex"
           flexDirection={"column"}
