@@ -8,6 +8,7 @@ import { PhysicalPersonType } from "../types/physical-person";
 import { removeSpecialCharacters } from "../utils/remove-special-characters";
 import { StatusReport } from "../enuns/status-report";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const validationPhysicalPersonSchema = z.object({
   id: z.string().optional(),
@@ -137,7 +138,9 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
 
       return response.data;
     } catch (error) {
-      setLoading("error");
+      toast.error(
+        "Erro ao cadastrar pessoa física, verifique os campos obrigatórios"
+      );
     }
   };
 
@@ -167,6 +170,7 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
       return response.data;
     } catch (error) {
       setLoading("error");
+      toast.error("Erro ao atualizar pessoa física");
     }
   };
 
@@ -178,6 +182,7 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
 
       setLoading("success");
     } catch (error) {
+      toast.error("Erro ao deletar pessoa física");
       setLoading("error");
     }
   };
@@ -190,6 +195,7 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
       setLoading("success");
     } catch (error) {
       setLoading("error-fetching");
+      toast.error("Erro ao buscar pessoas físicas");
     }
   };
 
@@ -205,6 +211,7 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
       form.reset(dataResponse);
     } catch (error) {
       setLoading("error");
+      toast.error("Erro ao buscar pessoa física");
     }
   };
 
@@ -224,7 +231,10 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
       form.setValue("addresses.complement", address.complemento);
       form.setValue("addresses.number", "");
     } catch (error) {
-      console.log("error fetch address ", error);
+      form.setError("addresses.zip_code", {
+        type: "manual",
+        message: "Cep inválido",
+      });
     }
   };
 
@@ -239,7 +249,7 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
       to();
     } catch (error) {
       setRequestReport(false);
-      console.log("error request report ", error);
+      toast.error("Erro ao solicitar relatório de pessoa física");
     } finally {
       setRequestReport(false);
     }
