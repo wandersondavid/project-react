@@ -1,0 +1,11 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app-frontend
+    env_file: ./.env
+    ports:
+      - "4173:4173"
+    environment:
+      VITE_APP_URL_BASE: ${VITE_APP_URL_BASE}
