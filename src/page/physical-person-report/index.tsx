@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { Download } from "lucide-react";
+import { fotmatDate } from "../../utils/format-date";
 
 const ContainerList = styled(List)`
   width: 100%;
@@ -23,13 +24,13 @@ export const PhysicalRersonReport = () => {
       <Box display="flex">
         {loading === "loading" && <SkeletonPage />}
         {loading === "success" && !!data.length && (
-          <ContainerList dense={false} style={{ width: "100%" }}>
+          <ContainerList dense={false}>
             {data.map((item, index) => (
               <>
                 <ListItem>
                   <ListItemText
                     primary={"Relatório de Pessoa Física (CSV)"}
-                    secondary={`Status: ${item.status}`}
+                    secondary={`Status: ${item.status} - Data: ${fotmatDate(item.created_at)}`}
                   />
                   <Download cursor={"pointer"} />
                 </ListItem>
