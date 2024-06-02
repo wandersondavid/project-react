@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { fetchCepData } from "../services/viacep/viacep.service";
 import { PhysicalPersonType } from "../types/physical-person";
 import { removeSpecialCharacters } from "../utils/remove-special-characters";
+import { StatusReport } from "../enuns/status-report";
 
 const validationPhysicalPersonSchema = z.object({
   id: z.string().optional(),
@@ -222,7 +223,7 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
     try {
       await api.post("/report/physical-person", {
         report: "physical-person",
-        status: "REQUESTED",
+        status: StatusReport.PENDING,
       });
     } catch (error) {
     } finally {
