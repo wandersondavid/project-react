@@ -40,7 +40,8 @@ export const PhysicalPerson = () => {
     open,
     fetchPhysicalPerson,
     requestReportPhysicalPerson,
-    to
+    requestReport,
+    to,
   } = usePhysicalPerson();
 
   return (
@@ -53,7 +54,8 @@ export const PhysicalPerson = () => {
           </Button>
 
           <Button variant="contained" onClick={handleOpenNewPerson}>
-            Nova pessoa física
+            {!requestReport && "Nova pessoa física"}
+            {requestReport && "Processando..."}
           </Button>
         </ContainerButton>
       }
