@@ -15,4 +15,4 @@ Para gerar a build do projeto, siga os passos abaixo:
 
 ## Docker Hub
 
-docker push wandersondavid/project-react_frontend:tagname
+docker pull wandersondavid/project-react_frontend:0.0.1
