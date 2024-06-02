@@ -217,6 +217,8 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
 
   const fetchAddress = async () => {
     try {
+      form.clearErrors("addresses.zip_code");
+
       const zipCode = form.watch("addresses.zip_code");
 
       if (!zipCode) {
@@ -232,9 +234,15 @@ export const usePhysicalPerson = (): usePhysicalPersonType => {
       form.setValue("addresses.number", "");
     } catch (error) {
       form.setError("addresses.zip_code", {
-        type: "manual",
+        type: "custom",
         message: "Cep inválido",
       });
+
+      form.setValue("addresses.city", "");
+      form.setValue("addresses.state", "");
+      form.setValue("addresses.neighborhood", "");
+      form.setValue("addresses.complement", "");
+      form.setValue("addresses.number", "");
     }
   };
 
