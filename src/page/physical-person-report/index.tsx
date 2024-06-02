@@ -4,7 +4,6 @@ import { SkeletonPage } from "./components/skeleton-page";
 import {
   Typography,
   Box,
-  Grid,
   List,
   ListItemText,
   ListItem,

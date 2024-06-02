@@ -1,7 +1,7 @@
 import {
   LoadingType,
   ValidationPhysicalPerson,
-} from "@/hooks/usePhysicalPerson";
+} from "../../../../hooks/usePhysicalPerson";
 import {
   Box,
   Button,
