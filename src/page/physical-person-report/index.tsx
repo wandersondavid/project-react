@@ -28,7 +28,7 @@ export const PhysicalRersonReport = () => {
               <>
                 <ListItem>
                   <ListItemText
-                    primary={"Relatório de Pessoa Física"}
+                    primary={"Relatório de Pessoa Física (CSV)"}
                     secondary={`Status: ${item.status}`}
                   />
                   <Download cursor={"pointer"} />
