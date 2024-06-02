@@ -11,3 +11,8 @@ Para executar o projeto, siga os passos abaixo:
 Para gerar a build do projeto, siga os passos abaixo:
  - Execute o comando ```npm run build```
  - Os arquivos da build serão gerados na pasta dist/ na raiz do projeto
+
+
+## Docker Hub
+
+docker push wandersondavid/project-react_frontend:tagname
