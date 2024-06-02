@@ -30,7 +30,6 @@ const ContainerButton = styled(Box)`
 
 const ButtonStyled = styled(Button)`
   width: 300px;
-
   @media (max-width: 768px) {
     width: 100%;
   }
